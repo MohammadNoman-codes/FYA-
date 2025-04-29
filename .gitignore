@@ -1,0 +1,35 @@
+# Gitignore for Naffeth MVP (Frontend + Backend)
+
+# General
+.DS_Store
+*.pem
+*.cer
+
+# Logs
+naffeth-mvp/**/*.log
+naffeth-mvp/**/npm-debug.log*
+naffeth-mvp/**/yarn-debug.log*
+naffeth-mvp/**/yarn-error.log*
+naffeth-mvp/**/lerna-debug.log*
+
+# Dependencies (Frontend & Backend)
+naffeth-mvp/**/node_modules/
+
+# Build output (Frontend)
+naffeth-mvp/frontend/build/
+
+# Build output (Backend - if any)
+naffeth-mvp/backend/dist/
+
+# Environment Variables (Frontend & Backend)
+# IMPORTANT: Ensure your actual .env files are NOT committed!
+naffeth-mvp/**/.env
+naffeth-mvp/**/.env.*
+!naffeth-mvp/**/.env.example
+
+# Database (Backend - SQLite)
+naffeth-mvp/*.sqlite
+naffeth-mvp/*.sqlite-journal
+
+# Editor/IDE specific
+.vscode/
