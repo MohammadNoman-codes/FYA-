@@ -65,7 +65,8 @@ const startServer = async () => {
   // Route files
   const authRoutes = require('./routes/auth');
   const courseRoutes = require('./routes/courses');
-  const quizRoutes = require('./routes/quizzes'); // Handles /:quizId/submit and potentially POST / for creation
+  const quizRoutes = require('./routes/quizzes');
+  const chatbotRoutes = require('./routes/chatbotRoutes'); // <-- Make sure this line exists
 
   const app = express();
 
@@ -85,6 +86,7 @@ const startServer = async () => {
   app.use('/api/auth', authRoutes);
   app.use('/api/courses', courseRoutes); // Includes GET /lessons/:lessonId via courseController
   app.use('/api/quizzes', quizRoutes); // Handles quiz submission and creation
+  app.use('/api/chatbot', chatbotRoutes); // <-- Make sure this line exists and uses the correct variable
 
   // If you still want POST /api/lessons/:lessonId/quizzes, you'd need a separate router or adjust quizRoutes/quizController
   // Example: const lessonQuizRouter = require('./routes/lessonQuizzes');

@@ -28,5 +28,17 @@ api.interceptors.request.use(
   }
 );
 
+// Function to send a message to the chatbot backend
+export const sendChatMessage = async (message) => {
+  try {
+    const response = await api.post('/chatbot/message', { message });
+    return response.data; // Should contain { success: true, reply: "..." }
+  } catch (error) {
+    console.error('Error sending chat message:', error.response?.data || error.message);
+    // Return a structured error or throw it
+    return { success: false, message: error.response?.data?.message || 'Failed to get chat response.' };
+  }
+};
+
 
 export default api;

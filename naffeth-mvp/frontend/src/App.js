@@ -2,15 +2,16 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 
-// Import Page Components (Create these files next)
+// Import Page Components
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import CourseListPage from './pages/CourseListPage';
 import CourseDetailPage from './pages/CourseDetailPage';
 import LessonPage from './pages/LessonPage';
-import Navbar from './components/Layout/Navbar'; // Create this component next
-import LoadingSpinner from './components/Common/LoadingSpinner'; // Optional loading indicator
+import Navbar from './components/Layout/Navbar';
+import LoadingSpinner from './components/Common/LoadingSpinner';
+import Chatbot from './components/Chatbot/Chatbot'; // Import the Chatbot component
 
 // Simple Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -25,7 +26,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
-  const { loading } = useAuth();
+  const { isAuthenticated, loading } = useAuth(); // Get isAuthenticated status
 
   if (loading) {
      // Optional: Show a loading spinner for the whole app initially
@@ -48,12 +49,16 @@ function App() {
           <Route path="/lessons/:lessonId" element={<ProtectedRoute><LessonPage /></ProtectedRoute>} />
 
           {/* Redirect root path */}
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          {/* Redirect to login if not authenticated, otherwise to dashboard */}
+          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />} />
+
 
           {/* Add a 404 Not Found route later */}
           {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </main>
+      {/* Render Chatbot only if authenticated */}
+      {isAuthenticated && <Chatbot />}
     </div>
   );
 }
