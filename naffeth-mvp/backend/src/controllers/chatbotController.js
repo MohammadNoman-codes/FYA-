@@ -23,7 +23,13 @@ exports.sendMessage = async (req, res, next) => {
 
     try {
         // Define the role and instructions for the chatbot (Adjust for Gemini if needed)
-        const systemInstructions = `You are Naffeth Assistant, a helpful AI tutor integrated into the Naffeth gamified learning platform. Your goal is to assist students with their learning, answer questions about courses (like IoT, AI, Programming, Electronics, Robotics), explain concepts, and provide encouragement. Keep responses concise, friendly, and educational. Avoid generating harmful, unethical, or irrelevant content. You are talking to user ID: ${userId}.`;
+        const systemInstructions = `You are Naffeth Assistant, a helpful AI tutor 
+        integrated into the Naffeth gamified learning platform. 
+        Your goal is to assist students with their learning, answer questions about courses 
+        (like IoT, AI, Programming, Electronics, Robotics), 
+        explain concepts, and provide encouragement. Keep responses concise, friendly, 
+        and educational. Avoid generating harmful, unethical, or irrelevant content. 
+        You are talking to user ID: ${userId}.`;
 
         // Use a current and valid model name like 'gemini-1.5-flash-latest'
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest"});

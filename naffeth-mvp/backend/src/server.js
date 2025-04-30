@@ -28,21 +28,21 @@ const addDummyData = async () => {
     // Check if courses already exist
     const courseCount = await Course.count();
     if (courseCount === 0) {
-      console.log('No courses found, adding dummy data...');
+      console.log('No courses/projects found, adding dummy data...');
       // --- Use relative paths for consistency ---
       await Course.bulkCreate([
-        // Use a consistent relative path, even if just a placeholder now
-        { title: 'Introduction to IoT', description: 'Learn the basics of the Internet of Things, sensors, and communication.', level: 7, category: 'IoT', imageUrl: '/images/iot-course.jpg' },
-        { title: 'AI Fundamentals', description: 'Explore core concepts of Artificial Intelligence and Machine Learning.', level: 9, category: 'AI', imageUrl: '/images/ai-fundamentals.jpg' },
-        { title: 'Python for Beginners', description: 'Start your programming journey with Python, a versatile language.', level: 8, category: 'Programming', imageUrl: '/images/python-beginners.jpg' },
-        { title: 'Basic Electronics', description: 'Understand circuits, components like resistors, capacitors, and transistors.', level: 7, category: 'Electronics', imageUrl: '/images/basic-electronics.jpg' },
-        { title: 'Robotics 101', description: 'An introduction to building and programming simple robots.', level: 10, category: 'Robotics', imageUrl: '/images/robotics-101.jpg' },
-        { title: 'Web Development Basics', description: 'Learn the fundamentals of HTML, CSS, and JavaScript.', level: 8, category: 'Programming', imageUrl: '/images/web-dev-basics.jpg' },
-        { title: 'Advanced AI Techniques', description: 'Dive deeper into neural networks, deep learning, and NLP.', level: 14, category: 'AI', imageUrl: '/images/advanced-ai.jpg' },
+        // Use Arabic titles and descriptions, framed as projects
+        { title: 'مشروع مقدمة في إنترنت الأشياء', description: 'تعلم أساسيات إنترنت الأشياء، المستشعرات، وطرق الاتصال.', level: 7, category: 'IoT', imageUrl: '/images/iot-course.jpg' },
+        { title: 'مشروع أساسيات الذكاء الاصطناعي', description: 'استكشف المفاهيم الأساسية للذكاء الاصطناعي وتعلم الآلة.', level: 9, category: 'AI', imageUrl: '/images/ai-fundamentals.jpg' },
+        { title: 'مشروع بايثون للمبتدئين', description: 'ابدأ رحلتك في البرمجة مع بايثون، لغة متعددة الاستخدامات.', level: 8, category: 'Programming', imageUrl: '/images/python-beginners.jpg' },
+        { title: 'مشروع أساسيات الإلكترونيات', description: 'فهم الدوائر والمكونات مثل المقاومات والمكثفات والترانزستورات.', level: 7, category: 'Electronics', imageUrl: '/images/basic-electronics.jpg' },
+        { title: 'مشروع الروبوتات 101', description: 'مقدمة لبناء وبرمجة الروبوتات البسيطة.', level: 10, category: 'Robotics', imageUrl: '/images/robotics-101.jpg' },
+        { title: 'مشروع أساسيات تطوير الويب', description: 'تعلم أساسيات HTML، CSS، وجافاسكريبت.', level: 8, category: 'Programming', imageUrl: '/images/web-dev-basics.jpg' },
+        { title: 'مشروع تقنيات الذكاء الاصطناعي المتقدمة', description: 'تعمق في الشبكات العصبية، التعلم العميق، ومعالجة اللغات الطبيعية.', level: 14, category: 'AI', imageUrl: '/images/advanced-ai.jpg' },
       ]);
-      console.log('Dummy courses created with relative image paths.');
+      console.log('Dummy projects created with Arabic titles.');
     } else {
-      console.log('Courses already exist, skipping dummy data creation.');
+      console.log('Courses/Projects already exist, skipping dummy data creation.');
     }
     // Add dummy data for other models (Lessons, Quizzes) here if needed
   } catch (error) {
