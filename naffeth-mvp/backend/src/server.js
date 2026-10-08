@@ -12,6 +12,7 @@ const User = require('./models/User');
 const Course = require('./models/Course');
 const Lesson = require('./models/Lesson');
 const { Quiz, Question, Option } = require('./models/Quiz'); // Import Quiz related models
+const Project = require('./models/Project'); // <-- Import Project model
 
 // Define Associations
 Course.hasMany(Lesson, { foreignKey: 'courseId', onDelete: 'CASCADE' }); // If a course is deleted, delete its lessons
@@ -19,6 +20,10 @@ Lesson.belongsTo(Course, { foreignKey: 'courseId' });
 
 Lesson.hasOne(Quiz, { foreignKey: 'lessonId', onDelete: 'CASCADE' }); // If a lesson is deleted, delete its quiz
 Quiz.belongsTo(Lesson, { foreignKey: 'lessonId' });
+
+// Optional: Define User <-> Project association later
+// User.hasMany(Project, { foreignKey: 'userId' });
+// Project.belongsTo(User, { foreignKey: 'userId' });
 
 // Note: Quiz <-> Question <-> Option associations are defined within Quiz.js
 
@@ -56,7 +61,7 @@ const startServer = async () => {
   await connectDB();
   // Use { force: true } ONLY if you want to drop tables and recreate (e.g., during initial dev)
   // Use { alter: true } to modify tables based on model changes
-  await sequelize.sync({ alter: true }); // Consider removing alter:true after initial setup
+  await sequelize.sync({ alter: true }); // This will now include the Project table
   console.log("All models were synchronized successfully.");
 
   // Add dummy data after syncing
@@ -66,7 +71,8 @@ const startServer = async () => {
   const authRoutes = require('./routes/auth');
   const courseRoutes = require('./routes/courses');
   const quizRoutes = require('./routes/quizzes');
-  const chatbotRoutes = require('./routes/chatbotRoutes'); // <-- Make sure this line exists
+  const chatbotRoutes = require('./routes/chatbotRoutes');
+  const projectRoutes = require('./routes/projectRoutes'); // <-- Import project routes
 
   const app = express();
 
@@ -86,7 +92,8 @@ const startServer = async () => {
   app.use('/api/auth', authRoutes);
   app.use('/api/courses', courseRoutes); // Includes GET /lessons/:lessonId via courseController
   app.use('/api/quizzes', quizRoutes); // Handles quiz submission and creation
-  app.use('/api/chatbot', chatbotRoutes); // <-- Make sure this line exists and uses the correct variable
+  app.use('/api/chatbot', chatbotRoutes);
+  app.use('/api/projects', projectRoutes); // <-- Mount project routes
 
   // If you still want POST /api/lessons/:lessonId/quizzes, you'd need a separate router or adjust quizRoutes/quizController
   // Example: const lessonQuizRouter = require('./routes/lessonQuizzes');

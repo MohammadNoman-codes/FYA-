@@ -40,5 +40,30 @@ export const sendChatMessage = async (message) => {
   }
 };
 
+// --- Project API Functions ---
+
+// Function to fetch all projects
+export const getProjects = async () => {
+  try {
+    const response = await api.get('/projects');
+    return response.data; // Should contain { success: true, count: ..., data: [...] }
+  } catch (error) {
+    console.error('Error fetching projects:', error.response?.data || error.message);
+    return { success: false, message: error.response?.data?.message || 'Failed to fetch projects.' };
+  }
+};
+
+// Function to create a new project
+export const createProject = async (projectData) => {
+  // projectData should be { name, description, competitionName, category }
+  try {
+    const response = await api.post('/projects', projectData);
+    return response.data; // Should contain { success: true, data: { new project } }
+  } catch (error) {
+    console.error('Error creating project:', error.response?.data || error.message);
+    return { success: false, message: error.response?.data?.message || 'Failed to create project.' };
+  }
+};
+
 
 export default api;

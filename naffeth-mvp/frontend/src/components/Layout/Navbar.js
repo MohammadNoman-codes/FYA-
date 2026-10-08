@@ -27,6 +27,9 @@ const Navbar = () => {
               <li className="navbar-item">
                 <Link to="/courses" className="navbar-link">Courses</Link>
               </li>
+              <li className="navbar-item"> {/* <-- Add Projects Link */}
+                <Link to="/projects" className="navbar-link">Projects</Link>
+              </li>
               <li className="navbar-item navbar-user">
                 <span>Hi, {user?.name} (Lvl: {user?.level}, Pts: {user?.points})</span>
               </li>

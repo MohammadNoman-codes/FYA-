@@ -9,6 +9,7 @@ import DashboardPage from './pages/DashboardPage';
 import CourseListPage from './pages/CourseListPage';
 import CourseDetailPage from './pages/CourseDetailPage';
 import LessonPage from './pages/LessonPage';
+import ProjectListPage from './pages/ProjectListPage'; // <-- Import Project List Page
 import Navbar from './components/Layout/Navbar';
 import LoadingSpinner from './components/Common/LoadingSpinner';
 import Chatbot from './components/Chatbot/Chatbot'; // Import the Chatbot component
@@ -24,6 +25,7 @@ const ProtectedRoute = ({ children }) => {
 
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
+
 
 function App() {
   const { isAuthenticated, loading } = useAuth(); // Get isAuthenticated status
@@ -47,6 +49,7 @@ function App() {
           <Route path="/courses" element={<ProtectedRoute><CourseListPage /></ProtectedRoute>} />
           <Route path="/courses/:courseId" element={<ProtectedRoute><CourseDetailPage /></ProtectedRoute>} />
           <Route path="/lessons/:lessonId" element={<ProtectedRoute><LessonPage /></ProtectedRoute>} />
+          <Route path="/projects" element={<ProtectedRoute><ProjectListPage /></ProtectedRoute>} /> {/* <-- Add Project Route */}
 
           {/* Redirect root path */}
           {/* Redirect to login if not authenticated, otherwise to dashboard */}
